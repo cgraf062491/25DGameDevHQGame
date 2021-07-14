@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-	private CharacterController _controller;
+	
 
 	[SerializeField] private float _speed = 5.0f;
 	[SerializeField] private float _gravity = 1.0f;
 	[SerializeField] private float _jumpHeight = 15.0f;
 	private float _yVelocity;
+	private int _coins;
 
 	private bool _canDoubleJump = true;
+
+	private CharacterController _controller;
 
     // Start is called before the first frame update
     void Start()
@@ -46,7 +49,19 @@ public class Player : MonoBehaviour
         		_yVelocity -= _gravity;
         	}
         }
+
+
         velocity.y = _yVelocity;
         _controller.Move(velocity * Time.deltaTime);
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+    	if(other.CompareTag("Coin"))
+    	{
+    		_coins += 1;
+    		Destroy(other.gameObject);
+    		UIManager.Instance.UpdateCoinDisplay(_coins);
+    	}
     }
 }
