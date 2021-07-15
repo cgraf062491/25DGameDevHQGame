@@ -20,16 +20,22 @@ public class UIManager : MonoBehaviour
 	}
 
 	[SerializeField] private Text _coinDisplay = null;
+	[SerializeField] private Text _livesDisplay = null;
     // Start is called before the first frame update
     void Awake()
     {
         _instance = this;
         _coinDisplay.text = "Coins: 0";
+        _livesDisplay.text = "Lives: 3";
     }
 
-    // Update is called once per frame
     public void UpdateCoinDisplay(int coinAmount)
     {
         _coinDisplay.text = "Coins: " + coinAmount;
+    }
+
+    public void UpdateLivesDisplay(int livesAmount)
+    {
+        _livesDisplay.text = "Lives: " + livesAmount;
     }
 }
